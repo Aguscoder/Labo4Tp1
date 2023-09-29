@@ -12,12 +12,13 @@ class Server{
     middleware(){
        
         this.app.use(cors());
-        this.app.use(express.static('public'));
+        //this.app.use(express.static('public'));
     }
 
     routers(){
          
-        this.app.use('/api/v1/peliculas', require('../routes/Discover'));
+        this.app.use('/api/v1/peliculas', require('../routes/Nowplaying'));
+
         this.app.all('*', (req, res) => {
             res.status(404).json({message:'404 Page Not Found'})
         })
@@ -26,7 +27,7 @@ class Server{
 
     listen(){
         this.app.listen(this.port, () =>{    
-            console.log(`App escuchando en el puerto ${this.port}`);
+            console.log(`Aplicación escuchando en el puerto ${this.port}`);
         });
     }
 
