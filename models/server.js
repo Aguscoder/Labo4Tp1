@@ -4,7 +4,7 @@ const cors = require('cors');
 class Server{
 
     constructor(){
-        this.port = process.env.PORT || 5000;
+        this.port = process.env.PORT || 3000;
         
         this.app = express();
 
@@ -17,8 +17,9 @@ class Server{
 
     middleware(){
         
-        //probar regla de restriccion
+       
         this.app.use(cors());
+        //this.app.use(express.static('public'));
         //una vez configurada esta seccion publica, NO es posible usar esta ruta
         this.app.use(express.static('public'));
     
@@ -36,8 +37,7 @@ class Server{
         }); 
     
     }
-
-
+ 
     listen() {
         this.app.listen(this.port, () => {
             console.log(` app listening/escuchando on port ${this.port}`);
