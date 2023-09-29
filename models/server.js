@@ -28,7 +28,7 @@ class Server{
 
     routers(){
         this.app.use('/api/v1/peliculas', require('../routes/Discover'));
-            
+        this.app.use('/api/v1/peliculas', require('../routes/Nowplaying')); 
         this.app.use('/api/v1/peliculas', require('../routes/topRated')); 
         
 
