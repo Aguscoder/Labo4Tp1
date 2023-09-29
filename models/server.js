@@ -19,6 +19,7 @@ class Server{
         
         //probar regla de restriccion
         this.app.use(cors());
+        //this.app.use(express.static('public'));
         //una vez configurada esta seccion publica, NO es posible usar esta ruta
         this.app.use(express.static('public'));
     
@@ -26,6 +27,10 @@ class Server{
 
 
     routers(){
+         
+        this.app.use('/api/v1/peliculas', require('../routes/Nowplaying'));
+
+        this.app.all('*', (req, res) => {
             
         this.app.use('/api/v1/peliculas', require('../routes/topRated')); 
         
@@ -37,6 +42,10 @@ class Server{
     }
 
 
+    listen(){
+        this.app.listen(this.port, () =>{    
+            console.log(`Aplicación escuchando en el puerto ${this.port}`);
+        });
     listen() {
         this.app.listen(this.port, () => {
             console.log(` app listening/escuchando on port ${this.port}`);
