@@ -4,7 +4,7 @@ const cors = require('cors');
 class Server{
 
     constructor(){
-        this.port = process.env.PORT || 5000;
+        this.port = process.env.PORT || 3000;
         
         this.app = express();
 
@@ -17,7 +17,7 @@ class Server{
 
     middleware(){
         
-        //probar regla de restriccion
+       
         this.app.use(cors());
         //this.app.use(express.static('public'));
         //una vez configurada esta seccion publica, NO es posible usar esta ruta
@@ -30,7 +30,7 @@ class Server{
          
         this.app.use('/api/v1/peliculas', require('../routes/Nowplaying'));
 
-        this.app.all('*', (req, res) => {
+        this.app.use('/api/v1/peliculas', require('../routes/Discover'));
             
         this.app.use('/api/v1/peliculas', require('../routes/topRated')); 
         
@@ -40,12 +40,7 @@ class Server{
         }); 
     
     }
-
-
-    listen(){
-        this.app.listen(this.port, () =>{    
-            console.log(`Aplicación escuchando en el puerto ${this.port}`);
-        });
+ 
     listen() {
         this.app.listen(this.port, () => {
             console.log(` app listening/escuchando on port ${this.port}`);
