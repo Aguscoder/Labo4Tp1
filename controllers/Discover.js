@@ -28,23 +28,22 @@ const getDiscover = (req = request, res = response) => {
 
 const getFiltroDiscover = (req = request, res = response) => {        
     const api = process.env.API_KEY;
-    const {page, language } = req.query;
+    const {year, region} = req.query;
     let query_params = '';
-    console.log(page, language);
+    console.log(year, region);
 
-    query_params += page && `&page=${page}`;
-    query_params += language && `&language=${language}`;
+    query_params += year && `&year=${year}`;
+    query_params += region && `&year=${region}`;
+   
 
-    axios.get(`${url}/3/movie/popular?api_key=${api}${query_params}`)
+    axios.get(`${url}/3/discover/movie?api_key=${api}${query_params}`)
         .then(({ status, data, statusText }) => {
            
             console.log({ status, data, statusText });
-            const {results, page } = data;
+            const { results, page } = data;
             res.status(200).json({
                 page,
-                status,
-                results,
-                statusText,                
+                results,    
             });
         })
         .catch((error)=>{
@@ -56,9 +55,11 @@ const getFiltroDiscover = (req = request, res = response) => {
             });
         });        
 }
-
+//Id pelicula necesario  
 const getIdPelicula = (req = request, res = response) => {        
     const api = process.env.API_KEY;
+
+	console.log(req.params)
 
     const { idPelicula } = req.params;
     
@@ -88,7 +89,8 @@ const getIdPelicula = (req = request, res = response) => {
 
 module.exports = {
     getDiscover,
+    getFiltroDiscover,
     getIdPelicula,
-    getFiltroDiscover
+
     
 };

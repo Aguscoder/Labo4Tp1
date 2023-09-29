@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getDiscover, getIdPelicula, getFiltroDiscover } = require('../controllers/Discover');
+const { getDiscover, getFiltroDiscover, getIdPelicula } = require('../controllers/Discover');
 
 const rutas = Router();
 
